@@ -1,13 +1,13 @@
 import MapGl, { useMap } from 'react-map-gl'
 
 type MapProps = React.ComponentProps<typeof MapGl> & { height?: string }
-
 export const Map = ({ height = 'calc(100vh - 4rem)', ...props }: MapProps) => {
   return (
     <MapGl
       {...props}
       projection={{ name: 'globe' }}
-      mapStyle="mapbox://styles/iamkarthick/clebahxqe001701mo1i1adtw3"
+      // Updated to your username and a standard style
+      mapStyle="mapbox://styles/r70esh/streets-v12" 
       mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
       style={{ height }}
       scrollZoom={false}

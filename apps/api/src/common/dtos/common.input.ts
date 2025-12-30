@@ -12,17 +12,31 @@ export type RestrictProperties<T, U> = {
   [K in keyof T]: K extends keyof U ? T[K] : never
 } & Required<U>
 
-// implements Prisma.DateTimeFilter
+// implements Pri
 @InputType()
 export class DateTimeFilter {
-  equals?: string;
+  @Field(() => String, { nullable: true })
+  equals?: string
+
+  @Field(() => [String], { nullable: true })
   in?: string[]
+
+  @Field(() => [String], { nullable: true })
   notIn?: string[]
+
+  @Field(() => String, { nullable: true })
   lt?: string
+
+  @Field(() => String, { nullable: true })
   lte?: string
+
+  @Field(() => String, { nullable: true })
   gt?: string
+
+  @Field(() => String, { nullable: true })
   gte?: string
 }
+
 
 registerEnumType(Prisma.QueryMode, {
   name: 'QueryMode',
@@ -47,47 +61,78 @@ export class StringFilter {
 }
 @InputType()
 export class StringListFilter {
+  @Field(() => [String], { nullable: true })
   equals?: string[]
+
+  @Field(() => String, { nullable: true })
   has?: string
+
+  @Field(() => [String], { nullable: true })
   hasEvery?: string[]
+
+  @Field(() => [String], { nullable: true })
   hasSome?: string[]
+
+  @Field(() => Boolean, { nullable: true })
   isEmpty?: boolean
 }
-
 @InputType()
 export class BoolFilter {
+  @Field(() => Boolean, { nullable: true })
   equals?: boolean
+
+  @Field(() => Boolean, { nullable: true })
   not?: boolean
 }
 
 // implements Required<Prisma.IntFilter>
 @InputType()
 export class IntFilter {
+  @Field(() => Float, { nullable: true })
   equals?: number
+
+  @Field(() => Float, { nullable: true })
   lt?: number
+
+  @Field(() => Float, { nullable: true })
   lte?: number
+
+  @Field(() => Float, { nullable: true })
   gt?: number
+
+  @Field(() => Float, { nullable: true })
   gte?: number
 }
-
 @InputType()
 export class FloatFilter {
+  @Field(() => Float, { nullable: true })
   equals?: number
+
+  @Field(() => Float, { nullable: true })
   lt?: number
+
+  @Field(() => Float, { nullable: true })
   lte?: number
+
+  @Field(() => Float, { nullable: true })
   gt?: number
+
+  @Field(() => Float, { nullable: true })
   gte?: number
+
+  @Field(() => Float, { nullable: true })
   not?: number
 }
-
 registerEnumType(Prisma.SortOrder, {
   name: 'SortOrder',
 })
 
 @ObjectType()
 export class AggregateCountOutput {
-  count: number
+  @Field(() => Float)
+  count: number;
 }
+
 
 @InputType()
 export class LocationFilterInput {

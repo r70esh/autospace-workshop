@@ -1,9 +1,7 @@
-import { Field, InputType, PartialType } from '@nestjs/graphql'
-import { Prisma } from '@prisma/client'
+import { Field, InputType, PartialType, Int } from '@nestjs/graphql'
 import {
   DateTimeFilter,
   IntFilter,
-  RestrictProperties,
   StringFilter,
   StringListFilter,
 } from 'src/common/dtos/common.input'
@@ -15,44 +13,78 @@ import { VerificationRelationFilter } from 'src/models/verifications/graphql/dto
 
 @InputType()
 export class GarageWhereUniqueInput {
+  @Field(() => Int)
   id: number
 }
 
 @InputType()
-export class GarageWhereInputStrict
-  implements
-    RestrictProperties<GarageWhereInputStrict, Prisma.GarageWhereInput>
-{
-  id: IntFilter
-  createdAt: DateTimeFilter
-  updatedAt: DateTimeFilter
-  displayName: StringFilter
-  description: StringFilter
-  images: StringListFilter
-  companyId: IntFilter
-  Company: CompanyRelationFilter
-  Address: AddressRelationFilter
-  Verification: VerificationRelationFilter
-  Reviews: ReviewListRelationFilter
-  Slots: SlotListRelationFilter
+class GarageWhereInputBase {
+  @Field(() => IntFilter, { nullable: true })
+  id?: IntFilter
 
-  AND: GarageWhereInput[]
-  OR: GarageWhereInput[]
-  NOT: GarageWhereInput[]
+  @Field(() => DateTimeFilter, { nullable: true })
+  createdAt?: DateTimeFilter
+
+  @Field(() => DateTimeFilter, { nullable: true })
+  updatedAt?: DateTimeFilter
+
+  @Field(() => StringFilter, { nullable: true })
+  displayName?: StringFilter
+
+  @Field(() => StringFilter, { nullable: true })
+  description?: StringFilter
+
+  @Field(() => StringListFilter, { nullable: true })
+  images?: StringListFilter
+
+  @Field(() => IntFilter, { nullable: true })
+  companyId?: IntFilter
+
+  @Field(() => CompanyRelationFilter, { nullable: true })
+  Company?: CompanyRelationFilter
+
+  @Field(() => AddressRelationFilter, { nullable: true })
+  Address?: AddressRelationFilter
+
+  @Field(() => VerificationRelationFilter, { nullable: true })
+  Verification?: VerificationRelationFilter
+
+  @Field(() => ReviewListRelationFilter, { nullable: true })
+  Reviews?: ReviewListRelationFilter
+
+  @Field(() => SlotListRelationFilter, { nullable: true })
+  Slots?: SlotListRelationFilter
+}
+
+@InputType('GarageWhereInput')
+export class GarageWhereInput extends PartialType(GarageWhereInputBase) {
+  @Field(() => [GarageWhereInput], { nullable: true })
+  AND?: GarageWhereInput[]
+
+  @Field(() => [GarageWhereInput], { nullable: true })
+  OR?: GarageWhereInput[]
+
+  @Field(() => [GarageWhereInput], { nullable: true })
+  NOT?: GarageWhereInput[]
 }
 
 @InputType()
-export class GarageWhereInput extends PartialType(GarageWhereInputStrict) {}
-
-@InputType()
 export class GarageListRelationFilter {
+  @Field(() => GarageWhereInput, { nullable: true })
   every?: GarageWhereInput
+
+  @Field(() => GarageWhereInput, { nullable: true })
   some?: GarageWhereInput
+
+  @Field(() => GarageWhereInput, { nullable: true })
   none?: GarageWhereInput
 }
 
 @InputType()
 export class GarageRelationFilter {
+  @Field(() => GarageWhereInput, { nullable: true })
   is?: GarageWhereInput
+
+  @Field(() => GarageWhereInput, { nullable: true })
   isNot?: GarageWhereInput
 }

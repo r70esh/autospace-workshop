@@ -28,7 +28,10 @@ export class RegisterWithCredentialsInput extends PickType(
   ['name', 'image'],
   InputType,
 ) {
+  @Field()
   email: string
+
+  @Field()
   password: string
 }
 
@@ -36,10 +39,13 @@ export class RegisterWithCredentialsInput extends PickType(
 export class LoginInput extends PickType(RegisterWithCredentialsInput, [
   'email',
   'password',
-]) {}
+] as const) {}
 
 @ObjectType()
 export class LoginOutput {
+  @Field()
   token: string
+
+  @Field(() => User)
   user: User
 }

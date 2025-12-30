@@ -1,9 +1,8 @@
-import { Field, InputType, PartialType } from '@nestjs/graphql'
+import { Field, InputType } from '@nestjs/graphql'
 import { Prisma } from '@prisma/client'
 import {
   DateTimeFilter,
   IntFilter,
-  RestrictProperties,
   StringFilter,
 } from 'src/common/dtos/common.input'
 import { BookingTimelineListRelationFilter } from 'src/models/booking-timelines/graphql/dtos/where.args'
@@ -13,43 +12,80 @@ import { ValetAssignmentListRelationFilter } from 'src/models/valet-assignments/
 
 @InputType()
 export class ValetWhereUniqueInput {
+  @Field(() => String)
   uid: string
 }
 
+/* 1️⃣ base (NON-recursive) fields */
 @InputType()
-export class ValetWhereInputStrict
-  implements RestrictProperties<ValetWhereInputStrict, Prisma.ValetWhereInput>
-{
-  User: UserRelationFilter
-  uid: StringFilter
-  createdAt: DateTimeFilter
-  updatedAt: DateTimeFilter
-  displayName: StringFilter
-  image: StringFilter
-  licenceID: StringFilter
-  companyId: IntFilter
-  Company: CompanyRelationFilter
-  BookingTimeline: BookingTimelineListRelationFilter
-  PickupAssignments: ValetAssignmentListRelationFilter
-  ReturnAssignments: ValetAssignmentListRelationFilter
+export class ValetWhereInputBase {
+  @Field(() => UserRelationFilter, { nullable: true })
+  User?: UserRelationFilter
 
-  AND: ValetWhereInput[]
-  OR: ValetWhereInput[]
-  NOT: ValetWhereInput[]
+  @Field(() => StringFilter, { nullable: true })
+  uid?: StringFilter
+
+  @Field(() => DateTimeFilter, { nullable: true })
+  createdAt?: DateTimeFilter
+
+  @Field(() => DateTimeFilter, { nullable: true })
+  updatedAt?: DateTimeFilter
+
+  @Field(() => StringFilter, { nullable: true })
+  displayName?: StringFilter
+
+  @Field(() => StringFilter, { nullable: true })
+  image?: StringFilter
+
+  @Field(() => StringFilter, { nullable: true })
+  licenceID?: StringFilter
+
+  @Field(() => IntFilter, { nullable: true })
+  companyId?: IntFilter
+
+  @Field(() => CompanyRelationFilter, { nullable: true })
+  Company?: CompanyRelationFilter
+
+  @Field(() => BookingTimelineListRelationFilter, { nullable: true })
+  BookingTimeline?: BookingTimelineListRelationFilter
+
+  @Field(() => ValetAssignmentListRelationFilter, { nullable: true })
+  PickupAssignments?: ValetAssignmentListRelationFilter
+
+  @Field(() => ValetAssignmentListRelationFilter, { nullable: true })
+  ReturnAssignments?: ValetAssignmentListRelationFilter
+}
+
+/* 2️⃣ recursive wrapper */
+@InputType()
+export class ValetWhereInput extends ValetWhereInputBase {
+  @Field(() => [ValetWhereInput], { nullable: true })
+  AND?: ValetWhereInput[]
+
+  @Field(() => [ValetWhereInput], { nullable: true })
+  OR?: ValetWhereInput[]
+
+  @Field(() => [ValetWhereInput], { nullable: true })
+  NOT?: ValetWhereInput[]
 }
 
 @InputType()
-export class ValetWhereInput extends PartialType(ValetWhereInputStrict) {}
-
-@InputType()
 export class ValetListRelationFilter {
+  @Field(() => ValetWhereInput, { nullable: true })
   every?: ValetWhereInput
+
+  @Field(() => ValetWhereInput, { nullable: true })
   some?: ValetWhereInput
+
+  @Field(() => ValetWhereInput, { nullable: true })
   none?: ValetWhereInput
 }
 
 @InputType()
 export class ValetRelationFilter {
+  @Field(() => ValetWhereInput, { nullable: true })
   is?: ValetWhereInput
+
+  @Field(() => ValetWhereInput, { nullable: true })
   isNot?: ValetWhereInput
 }

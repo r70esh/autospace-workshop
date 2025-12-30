@@ -1,4 +1,4 @@
-import { Field, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { Field, ObjectType, registerEnumType ,Int} from '@nestjs/graphql'
 import { $Enums, Slot as SlotType } from '@prisma/client'
 import { RestrictProperties } from 'src/common/dtos/common.input'
 
@@ -30,5 +30,6 @@ export class Slot implements RestrictProperties<Slot, SlotType> {
 
 @ObjectType()
 export class ReturnCount {
+  @Field(() => Int)
   count: number
 }
