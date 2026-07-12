@@ -11,7 +11,7 @@ export const GarageAdminCard = ({
   garage: GaragesQuery['garages'][0]
 }) => {
   return (
-    <div className="p-2 bg-white flex flex-col gap-2">
+    <div className="p-2 bg-dark-100 border border-white/10 rounded-lg shadow-glass flex flex-col gap-2">
       <p className="text-xs ">#{garage.id}</p>
       <div className="flex items-start gap-2">
         <h2 className="mb-1 font-semibold">{garage.displayName}</h2>

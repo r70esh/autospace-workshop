@@ -51,7 +51,7 @@ export const SearchPage = () => {
       <Panel position="left-top">
         <div className="flex flex-col items-stretch">
           <SearchPlaceBox />
-          <div className="flex relative pl-1 flex-col mt-1 bg-white/40 items-center gap-1 backdrop-blur-sm">
+          <div className="flex relative pl-1 flex-col mt-1 bg-dark-100/80 border border-white/10 items-center gap-1 backdrop-blur-sm rounded-lg">
             <div className=" absolute left-[1px] top-1/2 -translate-y-1/2 ">
               <IconArrowDown className="p-1" />
             </div>
@@ -92,7 +92,7 @@ export const SearchPage = () => {
         <Panel position="center-bottom">
           {Object.entries(errors).map(([key, value]) => {
             return (
-              <div className="text-red-800 p-2 shadow bg-white" key={key}>
+              <div className="text-red-300 p-2 shadow-glass bg-red-900/80 border border-red-500/30 rounded-lg" key={key}>
                 {key}: {value.message}
               </div>
             )

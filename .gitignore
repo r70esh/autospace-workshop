@@ -1,0 +1,29 @@
+# env
+.env
+.env.*
+!.env.example
+
+# node
+node_modules/
+
+# nx
+.nx/
+
+# next
+.next/
+out/
+
+# build
+dist/
+build/
+
+# misc
+*.log
+*.tsbuildinfo
+
+# yarn
+yarn-error.log*
+
+# lock files in sub-apps (only root yarn.lock matters)
+apps/**/yarn.lock
+libs/**/yarn.lock

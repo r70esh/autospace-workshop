@@ -32,7 +32,7 @@ export const AutoImageChanger = ({
 
   if (images.length === 0)
     return (
-      <div className="flex items-center justify-center w-full h-48 gap-2 text-sm bg-white border select-none border-gray-50 text-gray">
+      <div className="flex items-center justify-center w-full h-48 gap-2 text-sm bg-dark-100 border select-none border-white/10 text-gray-400">
         <IconPhotoCancel /> No images.
       </div>
     )
@@ -48,7 +48,7 @@ export const AutoImageChanger = ({
         {images.map((_, index) => (
           <div
             className={`h-2 rounded-full ${
-              currentImageIndex === index ? 'bg-white w-4' : 'bg-gray-300 w-2'
+              currentImageIndex === index ? 'bg-white w-4' : 'bg-gray-500 w-2'
             }`}
             key={index}
           />
@@ -65,7 +65,7 @@ export const AutoImageChanger = ({
               )
             }
           >
-            <IconChevronLeft className="w-6 h-6 text-black rounded-full bg-white/40 hover:bg-white" />
+            <IconChevronLeft className="w-6 h-6 text-white rounded-full bg-dark-100/40 hover:bg-dark-100/80 transition-colors" />
           </button>
           <button
             type="button"
@@ -76,7 +76,7 @@ export const AutoImageChanger = ({
               )
             }
           >
-            <IconChevronRight className="w-6 h-6 text-black rounded-full bg-white/40 hover:bg-white" />
+            <IconChevronRight className="w-6 h-6 text-white rounded-full bg-dark-100/40 hover:bg-dark-100/80 transition-colors" />
           </button>
         </>
       )}

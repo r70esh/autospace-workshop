@@ -24,8 +24,15 @@ export const Header = ({ type, menuItems }: IHeaderProps) => {
 
   return (
     <header>
-      <nav className="fixed z-40 top-0 w-full shadow-md bg-white/50 backdrop-blur-md">
-        <Container className="relative   flex items-center justify-between h-16 py-2 gap-16">
+      <nav className="fixed z-40 top-0 w-full glass-dark border-b border-white/5">
+        <div
+          className="absolute inset-x-0 bottom-0 h-px"
+          style={{
+            background:
+              'linear-gradient(90deg, transparent, hsl(248,85%,63%,0.5), hsl(270,80%,65%,0.4), transparent)',
+          }}
+        />
+        <Container className="relative flex items-center justify-between h-16 py-2 gap-16">
           <Link href="/" aria-label="Home" className="w-auto z-50">
             <Brand type={type} className="hidden h-10 sm:block" />
             <Brand type={type} shortForm className="block sm:hidden" />
@@ -36,13 +43,12 @@ export const Header = ({ type, menuItems }: IHeaderProps) => {
                 <div className="text-sm mr-6 flex gap-3">
                   <Menus menuItems={menuItems} />
                 </div>
-
                 <NavSidebar menuItems={menuItems} />
               </div>
             ) : (
               <>
                 <Link href="/register">
-                  <Button variant="outlined" className="hidden md:block">
+                  <Button variant="outlined" color="white" className="hidden md:block">
                     Register
                   </Button>
                 </Link>

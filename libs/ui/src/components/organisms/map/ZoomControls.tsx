@@ -20,7 +20,7 @@ const ZoomControlButton = ({
   onClick: MouseEventHandler<HTMLButtonElement>
 }) => (
   <button
-    className=" hover:bg-white bg-white/40"
+    className="hover:bg-dark-100 bg-dark-100/60 transition-colors rounded backdrop-blur-sm"
     type="button"
     onClick={onClick}
   >
@@ -33,7 +33,7 @@ const ZoomIn = () => {
 
   return (
     <ZoomControlButton onClick={() => map?.zoomIn()}>
-      <IconPlus className="w-8 h-8 p-1.5 text-black" />
+      <IconPlus className="w-8 h-8 p-1.5 text-white" />
     </ZoomControlButton>
   )
 }
@@ -42,7 +42,7 @@ const ZoomOut = () => {
   const { current: map } = useMap()
   return (
     <ZoomControlButton onClick={() => map?.zoomOut()}>
-      <IconMinus className="w-8 h-8 p-1.5 text-black" />
+      <IconMinus className="w-8 h-8 p-1.5 text-white" />
     </ZoomControlButton>
   )
 }
@@ -62,7 +62,7 @@ export const CenterOfMap = ({
         onClick({ lat, lng })
       }}
     >
-      <Icon className="w-8 h-8 p-1.5 text-black" />
+      <Icon className="w-8 h-8 p-1.5 text-white" />
     </ZoomControlButton>
   )
 }

@@ -16,7 +16,7 @@ export const CustomerBookingCard = ({ booking }: IBookingCardProps) => {
   const lng = booking.slot.garage.address?.lng || 0
 
   return (
-    <div className="shadow-lg bg-white p-2">
+    <div className="shadow-glass bg-dark-100 border border-white/10 rounded-lg p-2">
       <div className="flex flex-col gap-2">
         <StartEndDateCard
           startTime={booking.startTime}

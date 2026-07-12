@@ -22,6 +22,6 @@ export const TitleStrongValue = ({
 }) => (
   <div>
     <div className="text-sm text-gray">{title}</div>
-    <div className="text-black">{children}</div>{' '}
+    <div className="text-white">{children}</div>{' '}
   </div>
 )

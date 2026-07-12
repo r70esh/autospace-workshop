@@ -31,9 +31,9 @@ export const FilterSidebar = () => {
         size="sm"
         variant="text"
         onClick={() => setOpen(true)}
-        className=" hover:bg-gray-200"
+        className=" hover:bg-dark-100 transition-colors"
       >
-        <IconFilter className="stroke-1.5 text-black" />
+        <IconFilter className="stroke-1.5 text-white" />
         {Object.values(dirtyFields).length ? <PulsingDot /> : null}
       </Button>
       <Sidebar open={open} setOpen={setOpen} blur={false}>

@@ -1,64 +1,95 @@
 import colors from 'tailwindcss/colors'
 
-const brandHue = 52
+// Modern indigo-violet primary brand
+const brandHue = 248
 
-// #ffdd00 for brandHue 52
 const primaryPallete = {
-  DEFAULT: `hsl(${brandHue}, 100%, 50%)`,
-  25: `hsl(${brandHue}, 100%, 98%)`,
-  50: `hsl(${brandHue}, 100%, 92%)`,
-  100: `hsl(${brandHue}, 100%, 84%)`,
-  200: `hsl(${brandHue}, 100%, 75%)`,
-  300: `hsl(${brandHue}, 100%, 66%)`,
-  400: `hsl(${brandHue}, 100%, 58%)`,
-  500: `hsl(${brandHue}, 100%, 50%)`,
-  600: `hsl(${brandHue}, 100%, 45%)`,
-  700: `hsl(${brandHue}, 100%, 30%)`,
-  800: `hsl(${brandHue}, 100%, 20%)`,
-  900: `hsl(${brandHue}, 100%, 06%)`,
+  DEFAULT: `hsl(${brandHue}, 85%, 63%)`,
+  25:  `hsl(${brandHue}, 85%, 98%)`,
+  50:  `hsl(${brandHue}, 85%, 95%)`,
+  100: `hsl(${brandHue}, 85%, 88%)`,
+  200: `hsl(${brandHue}, 85%, 78%)`,
+  300: `hsl(${brandHue}, 85%, 70%)`,
+  400: `hsl(${brandHue}, 85%, 65%)`,
+  500: `hsl(${brandHue}, 85%, 58%)`,
+  600: `hsl(${brandHue}, 85%, 50%)`,
+  700: `hsl(${brandHue}, 85%, 38%)`,
+  800: `hsl(${brandHue}, 85%, 24%)`,
+  900: `hsl(${brandHue}, 85%, 12%)`,
 }
+
+// Cool slate gray (slightly purple-tinted for cohesion)
 const grayPallete = {
-  DEFAULT: `hsl(${brandHue}, 2%, 32%)`,
-  25: `hsl(${brandHue}, 2%, 94%)`,
-  50: `hsl(${brandHue}, 2%, 90%)`,
-  100: `hsl(${brandHue}, 2%, 80%)`,
-  200: `hsl(${brandHue}, 2%, 70%)`,
-  300: `hsl(${brandHue}, 2%, 60%)`,
-  400: `hsl(${brandHue}, 2%, 50%)`,
-  500: `hsl(${brandHue}, 2%, 32%)`,
-  600: `hsl(${brandHue}, 2%, 24%)`,
-  700: `hsl(${brandHue}, 2%, 16%)`,
-  800: `hsl(${brandHue}, 2%, 08%)`,
-  900: `hsl(${brandHue}, 2%, 04%)`,
+  DEFAULT: `hsl(220, 12%, 50%)`,
+  25:  `hsl(220, 12%, 97%)`,
+  50:  `hsl(220, 12%, 94%)`,
+  100: `hsl(220, 12%, 87%)`,
+  200: `hsl(220, 12%, 74%)`,
+  300: `hsl(220, 12%, 60%)`,
+  400: `hsl(220, 12%, 48%)`,
+  500: `hsl(220, 12%, 36%)`,
+  600: `hsl(220, 12%, 26%)`,
+  700: `hsl(220, 12%, 16%)`,
+  800: `hsl(220, 12%, 10%)`,
+  900: `hsl(220, 12%, 5%)`,
+}
+
+// Dark surface palette for glassmorphism
+const darkPallete = {
+  DEFAULT: `hsl(222, 28%, 7%)`,
+  50:  `hsl(222, 28%, 11%)`,
+  100: `hsl(222, 28%, 14%)`,
+  200: `hsl(222, 28%, 18%)`,
+  300: `hsl(222, 28%, 23%)`,
+  400: `hsl(222, 28%, 28%)`,
+  500: `hsl(222, 28%, 7%)`,
+  600: `hsl(222, 28%, 5%)`,
+  900: `hsl(222, 28%, 3%)`,
+}
+
+// Violet accent (secondary brand color for gradients)
+const violetPallete = {
+  DEFAULT: `hsl(270, 80%, 65%)`,
+  50:  `hsl(270, 80%, 96%)`,
+  100: `hsl(270, 80%, 88%)`,
+  200: `hsl(270, 80%, 76%)`,
+  300: `hsl(270, 80%, 68%)`,
+  400: `hsl(270, 80%, 63%)`,
+  500: `hsl(270, 80%, 58%)`,
+  600: `hsl(270, 80%, 50%)`,
+  700: `hsl(270, 80%, 38%)`,
+  800: `hsl(270, 80%, 24%)`,
+  900: `hsl(270, 80%, 10%)`,
 }
 
 const greenPallete = {
-  DEFAULT: 'hsl(116, 100%, 27%)',
-  25: 'hsl(116, 100%, 98%)',
-  50: 'hsl(116, 100%, 90%)',
-  100: 'hsl(116, 100%, 78%)',
-  200: 'hsl(116, 100%, 66%)',
-  300: 'hsl(116, 100%, 54%)',
-  400: 'hsl(116, 100%, 40%)',
-  500: 'hsl(116, 100%, 27%)',
-  600: 'hsl(116, 100%, 21%)',
-  700: 'hsl(116, 100%, 14%)',
-  800: 'hsl(116, 100%, 08%)',
-  900: 'hsl(116, 100%, 04%)',
+  DEFAULT: 'hsl(142, 72%, 42%)',
+  25:  'hsl(142, 72%, 98%)',
+  50:  'hsl(142, 72%, 92%)',
+  100: 'hsl(142, 72%, 80%)',
+  200: 'hsl(142, 72%, 66%)',
+  300: 'hsl(142, 72%, 54%)',
+  400: 'hsl(142, 72%, 46%)',
+  500: 'hsl(142, 72%, 42%)',
+  600: 'hsl(142, 72%, 32%)',
+  700: 'hsl(142, 72%, 22%)',
+  800: 'hsl(142, 72%, 12%)',
+  900: 'hsl(142, 72%, 6%)',
 }
+
 const redPallete = {
-  DEFAULT: 'hsl(10, 94%, 45%)',
-  25: 'hsl(10, 94%, 98%)',
-  50: 'hsl(10, 94%, 92%)',
-  100: 'hsl(10, 94%, 84%)',
-  200: 'hsl(10, 94%, 74%)',
-  300: 'hsl(10, 94%, 64%)',
-  400: 'hsl(10, 94%, 54%)',
-  500: 'hsl(10, 94%, 45%)',
-  600: 'hsl(10, 94%, 35%)',
-  700: 'hsl(10, 94%, 22%)',
-  800: 'hsl(10, 94%, 10%)',
-  900: 'hsl(10, 94%, 04%)',
+  DEFAULT: 'hsl(354, 80%, 52%)',
+  25:  'hsl(354, 80%, 98%)',
+  50:  'hsl(354, 80%, 94%)',
+  100: 'hsl(354, 80%, 86%)',
+  200: 'hsl(354, 80%, 76%)',
+  300: 'hsl(354, 80%, 66%)',
+  400: 'hsl(354, 80%, 58%)',
+  500: 'hsl(354, 80%, 52%)',
+  600: 'hsl(354, 80%, 42%)',
+  700: 'hsl(354, 80%, 28%)',
+  800: 'hsl(354, 80%, 16%)',
+  900: 'hsl(354, 80%, 8%)',
 }
 
 export const animationConfig = {
@@ -198,5 +229,7 @@ export const colorsConfig = {
   red: redPallete,
   green: greenPallete,
   gray: grayPallete,
-  accent: colors.black,
+  dark: darkPallete,
+  violet: violetPallete,
+  accent: primaryPallete.DEFAULT,
 }

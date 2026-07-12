@@ -25,8 +25,8 @@
     "cloc": "npx cloc --exclude-dir=node_modules,dist,build,yarn.lock,package.json,generated.tsx,.next,.nx ."
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "r70esh",
+  "license": "MIT",
   "devDependencies": {
     "prettier": "^2.3.2",
     "typescript": "^5.4.3",

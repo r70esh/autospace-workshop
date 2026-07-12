@@ -39,7 +39,7 @@ export const ValetTripCard = ({
       <MapLink waypoints={[start, end]}>
         <StaticMapDirections start={start} end={end} coordinates={data} />
       </MapLink>
-      <div className="p-2 bg-white space-y-2 ">
+      <div className="p-2 bg-dark-100 border border-white/10 rounded-b-lg space-y-2">
         <div className="flex justify-between gap-2 ">
           <div>
             <div className="text-lg font-semibold">

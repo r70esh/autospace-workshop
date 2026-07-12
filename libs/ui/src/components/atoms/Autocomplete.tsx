@@ -28,15 +28,15 @@ export const Autocomplete = <T,>({
       renderInput={(params) => (
         <div
           ref={params.InputProps.ref}
-          className="flex items-center bg-transparent"
+          className="flex items-center bg-dark-100 border border-white/20 rounded-lg"
         >
           <input
             type="text"
             {...params.inputProps}
-            className="w-full py-2 pl-3 text-sm pr-8 shadow-none focus:ring-0  border border-white"
+            className="w-full py-2 pl-3 text-sm pr-8 shadow-none focus:ring-0 bg-transparent text-white placeholder-gray-400 outline-none"
             placeholder={placeholder}
           />
-          <IconSearch className="w-4 h-4 text-gray-800 stroke-2 -ml-7" />
+          <IconSearch className="w-4 h-4 text-gray-400 stroke-2 -ml-7" />
         </div>
       )}
       {...props}

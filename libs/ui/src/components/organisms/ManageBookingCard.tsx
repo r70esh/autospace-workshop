@@ -11,7 +11,7 @@ export interface IManageBookingCardProps {
 
 export const ManageBookingCard = ({ booking }: IManageBookingCardProps) => {
   return (
-    <div className="p-4 space-y-3 bg-white ">
+    <div className="p-4 space-y-3 bg-dark-100 border border-white/10 rounded-lg shadow-glass">
       <div className="flex items-start justify-between">
         <TitleStrongValue title={'Vehicle number'}>
           <div className="text-3xl font-bold">{booking.vehicleNumber}</div>

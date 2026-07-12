@@ -7,7 +7,7 @@ export const Map = ({ height = 'calc(100vh - 4rem)', ...props }: MapProps) => {
     <MapGl
       {...props}
       projection={{ name: 'globe' }}
-      mapStyle="mapbox://styles/iamkarthick/clebahxqe001701mo1i1adtw3"
+      mapStyle="mapbox://styles/r70esh/cmjzzdimr003m01sghshx0jnh"
       mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
       style={{ height }}
       scrollZoom={false}

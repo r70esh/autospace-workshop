@@ -50,14 +50,12 @@ export const RegisterForm = ({ className, role }: ISignupFormProps) => {
     >
       <HtmlLabel title="Email" error={errors.email?.message}>
         <HtmlInput
-          className="text-black"
           placeholder="Enter the email."
           {...register('email')}
         />
       </HtmlLabel>
       <HtmlLabel title="Password" error={errors.password?.message}>
         <HtmlInput
-          className="text-black"
           type="password"
           placeholder="······"
           {...register('password')}
@@ -65,7 +63,6 @@ export const RegisterForm = ({ className, role }: ISignupFormProps) => {
       </HtmlLabel>
       <HtmlLabel title="Display name" error={errors.name?.message}>
         <HtmlInput
-          className="text-black"
           placeholder="Enter your name."
           {...register('name')}
         />

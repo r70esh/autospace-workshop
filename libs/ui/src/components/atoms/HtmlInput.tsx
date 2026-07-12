@@ -6,7 +6,7 @@ export const HtmlInput = React.forwardRef<HTMLInputElement, HtmlInputProps>(
   ({ className, ...props }, ref) => (
     <input
       ref={ref}
-      className={`block w-full px-3 py-2 border rounded appearance-none placeholder-gray read-only:text-gray-600 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm ${className}`}
+      className={`block w-full px-3.5 py-2.5 rounded-lg bg-dark-100 border border-white/10 text-white placeholder-gray-400 read-only:text-gray-400 read-only:bg-dark-50 focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 sm:text-sm transition-all duration-200 ${className}`}
       {...props}
     />
   ),

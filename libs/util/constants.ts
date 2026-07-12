@@ -1,9 +1,9 @@
 import { LocationInfo } from './types'
 
 export const initialViewState = {
-  latitude: 40.7128,
-  longitude: -74.006,
-  zoom: 11.5,
+  latitude: 27.7172,
+  longitude: 85.324,
+  zoom: 12, // good city-level zoom for Kathmandu
 }
 
 export const majorCitiesLocationInfo: LocationInfo[] = [
@@ -49,6 +49,6 @@ export const majorCitiesLocationInfo: LocationInfo[] = [
   },
 ]
 
-export const VALET_CHARGE_PER_METER = 0.005
+export const VALET_CHARGE_PER_METER = 0.0
 
 export const TAKE_COUNT = 12

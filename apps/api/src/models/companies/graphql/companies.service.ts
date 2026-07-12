@@ -18,9 +18,13 @@ export class CompaniesService {
         description,
         displayName,
         Managers: {
-          create: {
-            displayName: managerName,
-            uid: managerId,
+          // Use connectOrCreate to avoid unique constraint errors
+          connectOrCreate: {
+            where: { uid: managerId },
+            create: {
+              uid: managerId,
+              displayName: managerName,
+            },
           },
         },
       },

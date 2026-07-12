@@ -12,7 +12,7 @@ export const AdminCard = ({ admin, children }: AdminCardProps) => {
   const session = useSession()
   const uid = session.data?.user?.uid
   return (
-    <div className="bg-white p-2 shadow-lg">
+    <div className="bg-dark-100 border border-white/10 rounded-lg shadow-glass p-2">
       <div className="flex items-start gap-2">
         <h2 className="text-lg font-bold ">{admin.user?.name}</h2>
         {uid === admin.uid ? (

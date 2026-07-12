@@ -49,13 +49,13 @@ export const ShowGarageBookings = ({
   return (
     <div className="mt-4">
       <div className="flex justify-center">
-        <div className="flex justify-start items-center gap-2 w-full max-w-xl  rounded-full shadow-xl bg-white px-4">
-          <IconSearch />
+        <div className="flex justify-start items-center gap-2 w-full max-w-xl rounded-full shadow-glass bg-dark-100 border border-white/20 px-4">
+          <IconSearch className="text-gray-400" />
           <input
             placeholder="Search vehicle number"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="flex-grow py-4 bg-transparent"
+            className="flex-grow py-4 bg-transparent text-white placeholder-gray-400 outline-none"
           />
         </div>
       </div>

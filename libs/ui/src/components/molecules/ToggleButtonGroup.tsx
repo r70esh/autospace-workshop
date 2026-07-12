@@ -17,7 +17,7 @@ export const ToggleButton = (props: ToggleButtonProps) => (
   <ToggleButtonMui
     classes={{
       root: 'rounded-none transition-all',
-      selected: 'border border-black bg-white shadow-lg',
+      selected: 'border border-primary-500 bg-dark-100 shadow-glass text-white',
       //   standard: 'bg-gray-50 ',
     }}
     disableRipple

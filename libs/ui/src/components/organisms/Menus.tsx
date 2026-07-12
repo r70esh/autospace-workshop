@@ -10,7 +10,7 @@ export const Menus = ({ menuItems }: IMenuItemProps) => {
     <>
       {menuItems.map(({ label, href }) => (
         <Link
-          className="hover:underline underline-offset-8 transition-all "
+          className="relative text-gray-300 hover:text-white font-medium transition-colors duration-150 after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-gradient-to-r after:from-primary after:to-violet after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left"
           key={label}
           href={href}
         >

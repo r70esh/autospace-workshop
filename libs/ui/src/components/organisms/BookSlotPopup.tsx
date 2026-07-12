@@ -48,10 +48,7 @@ export const BookSlotPopup = ({
     (slot) => slot.type === type,
   )?.pricePerHour
 
-  const totalPriceObj = useTotalPrice({
-    pricePerHour,
-  })
-
+  const totalPriceObj = useTotalPrice({ pricePerHour })
   const totalPrice =
     totalPriceObj.parkingCharge +
     totalPriceObj.valetChargeDropoff +
@@ -59,51 +56,53 @@ export const BookSlotPopup = ({
 
   const [booking, setBooking] = useState(false)
 
-  return (
-    <div className="flex gap-2 text-left border-t-2 border-white bg-white/50 backdrop-blur-sm">
-      <Form
-        onSubmit={handleSubmit(async (data) => {
-          if (!uid) {
-            alert('You are not logged in.')
-            return
-          }
-          const bookingData: CreateBookingInput = {
-            phoneNumber: data.phoneNumber,
-            customerId: uid,
-            endTime: data.endTime,
-            startTime: data.startTime,
-            type: data.type,
-            garageId: garage.id,
-            vehicleNumber: data.vehicleNumber,
-            totalPrice,
-            pricePerHour,
-            ...(data.valet?.pickupInfo && data.valet?.dropoffInfo
-              ? {
-                  valetAssignment: {
-                    pickupLat: data.valet?.pickupInfo?.lat,
-                    pickupLng: data.valet?.pickupInfo?.lng,
-                    returnLat: data.valet?.dropoffInfo?.lat,
-                    returnLng: data.valet?.dropoffInfo?.lng,
-                  },
-                }
-              : null),
-          }
+  const onSubmit = async (data: FormTypeBookSlot) => {
+    if (!uid) {
+      alert('You are not logged in.')
+      return
+    }
 
-          try {
-            setBooking(true)
-            // Create booking session
-            const res = await createBookingSession(
-              uid!,
-              totalPriceObj,
-              bookingData,
-            )
-          } catch (error) {
-            toast('An error occurred while creating the booking session.')
-          } finally {
-            setBooking(false)
+    const bookingData: CreateBookingInput = {
+      phoneNumber: data.phoneNumber,
+      customerId: uid,
+      endTime: data.endTime,
+      startTime: data.startTime,
+      type: data.type,
+      garageId: garage.id,
+      vehicleNumber: data.vehicleNumber,
+      totalPrice,
+      pricePerHour,
+      ...(data.valet?.pickupInfo && data.valet?.dropoffInfo
+        ? {
+            valetAssignment: {
+              pickupLat: data.valet.pickupInfo.lat,
+              pickupLng: data.valet.pickupInfo.lng,
+              returnLat: data.valet.dropoffInfo.lat,
+              returnLng: data.valet.dropoffInfo.lng,
+            },
           }
-        })}
-      >
+        : null),
+    }
+
+    try {
+      setBooking(true)
+      const res = await createBookingSession(uid, totalPriceObj, bookingData)
+
+      if (!res.sessionId) {
+        // Free booking: no Stripe session
+        toast('Booking created successfully (testing mode, no payment).')
+      }
+    } catch (error) {
+      console.error(error)
+      toast('An error occurred while creating the booking session.')
+    } finally {
+      setBooking(false)
+    }
+  }
+
+  return (
+    <div className="flex gap-2 text-left border-t border-white/10 bg-dark-100/80 backdrop-blur-sm">
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex items-start gap-2">
           <div className="mb-2 text-lg font-bold">{garage.displayName}</div>
           {garage.verification?.verified ? (
@@ -116,15 +115,18 @@ export const BookSlotPopup = ({
             </Badge>
           )}
         </div>
+
         <div className="mb-2 text-xl font-extralight">
           {garage.address?.address}
         </div>
+
         <AutoImageChanger
           images={garage.images || []}
           durationPerImage={10000}
           aspectRatio="aspect-video"
           noAutoChange
         />
+
         <DateRangeBookingInfo startTime={startTime} endTime={endTime} />
 
         <div className="flex flex-wrap gap-2 mt-2">
@@ -132,49 +134,46 @@ export const BookSlotPopup = ({
             <Controller
               name="type"
               control={control}
-              render={({ field: { onChange, value } }) => {
-                return (
-                  <RadioGroup
-                    value={value || ''}
-                    onChange={onChange}
-                    className="flex w-full gap-2"
-                    defaultValue={''}
-                  >
-                    {garage.availableSlots.map((slot) => (
-                      <div
-                        key={slot.type}
-                        className="flex flex-wrap items-center gap-2 bg-white"
-                      >
-                        <Radio key={slot.type} value={slot.type}>
-                          {({ checked }) => (
-                            <div
-                              className={`cursor-default border-2 p-2 ${
-                                checked
-                                  ? 'border-primary-500 shadow-md'
-                                  : 'border-gray-200'
-                              }`}
-                            >
-                              <div className="flex items-center gap-2">
-                                {slot.type ? IconTypes[slot.type] : null}
-                                <div>
-                                  <span className="text-lg font-bold">
-                                    ${slot.pricePerHour}
-                                  </span>
-                                  /hr
-                                </div>
-                              </div>
-
-                              <div className="text-gray-600">
-                                {slot.count} open
+              render={({ field: { onChange, value } }) => (
+                <RadioGroup
+                  value={value || ''}
+                  onChange={onChange}
+                  className="flex w-full gap-2"
+                  defaultValue=""
+                >
+                  {garage.availableSlots.map((slot) => (
+                    <div
+                      key={slot.type}
+                      className="flex flex-wrap items-center gap-2 bg-dark-50 rounded"
+                    >
+                      <Radio value={slot.type}>
+                        {({ checked }) => (
+                          <div
+                            className={`cursor-default border-2 p-2 ${
+                              checked
+                                ? 'border-primary-500 shadow-md'
+                                : 'border-gray-200'
+                            }`}
+                          >
+                            <div className="flex items-center gap-2">
+                              {slot.type ? IconTypes[slot.type] : null}
+                              <div>
+                                <span className="text-lg font-bold">
+                                  ${slot.pricePerHour}
+                                </span>
+                                /hr
                               </div>
                             </div>
-                          )}
-                        </Radio>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                )
-              }}
+                            <div className="text-gray-600">
+                              {slot.count} open
+                            </div>
+                          </div>
+                        )}
+                      </Radio>
+                    </div>
+                  ))}
+                </RadioGroup>
+              )}
             />
           </HtmlLabel>
         </div>
@@ -196,10 +195,13 @@ export const BookSlotPopup = ({
         </HtmlLabel>
 
         <HtmlLabel title="Vehicle number" error={errors.vehicleNumber?.message}>
-          <HtmlInput placeholder="KA01AB1234" {...register('vehicleNumber')} />
+          <HtmlInput
+            placeholder="BA 13 CHA 4567"
+            {...register('vehicleNumber')}
+          />
         </HtmlLabel>
         <HtmlLabel title="Phone number" error={errors.phoneNumber?.message}>
-          <HtmlInput placeholder="+910000000000" {...register('phoneNumber')} />
+          <HtmlInput placeholder="+977" {...register('phoneNumber')} />
         </HtmlLabel>
         <ManageValets garage={garage} />
 
@@ -217,7 +219,6 @@ export const BookSlotPopup = ({
               title="Valet Dropoff"
               price={totalPriceObj.valetChargeDropoff}
             />
-
             <CostTitleValue title="Total" price={totalPrice} />
           </div>
         ) : null}
@@ -230,35 +231,37 @@ export const BookSlotPopup = ({
   )
 }
 
+// Updated function to handle $0 totals
 export const createBookingSession = async (
   uid: string,
   totalPriceObj: TotalPrice,
   bookingData: CreateBookingInput,
 ) => {
-  try {
+  const total =
+    totalPriceObj.parkingCharge +
+    totalPriceObj.valetChargePickup +
+    totalPriceObj.valetChargeDropoff
+
+  if (total <= 0) {
+    // Free booking in testing: create booking directly
     const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/stripe', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        totalPriceObj,
-        uid,
-        bookingData,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ totalPriceObj, uid, bookingData }),
     })
-    const checkoutSession = await response.json()
-
-    const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-
-    const stripe = await loadStripe(publishableKey || '')
-    const result = await stripe?.redirectToCheckout({
-      sessionId: checkoutSession.sessionId,
-    })
-
-    return result
-  } catch (error) {
-    console.error('Error creating booking session:', error)
-    throw error
+    return await response.json() // sessionId will be null
   }
+
+  // Normal Stripe flow
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/stripe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ totalPriceObj, uid, bookingData }),
+  })
+  const checkoutSession = await response.json()
+
+  const stripe = await loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
+  )
+  await stripe?.redirectToCheckout({ sessionId: checkoutSession.sessionId })
 }

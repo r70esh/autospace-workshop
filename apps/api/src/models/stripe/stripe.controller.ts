@@ -26,7 +26,27 @@ export class StripeController {
   }
 
   @Post()
-  create(@Body() createStripeDto: CreateStripeDto) {
+  async create(@Body() createStripeDto: CreateStripeDto) {
+    // Check if totalPriceObj is all zeros
+    const total = Object.values(createStripeDto.totalPriceObj || {}).reduce(
+      (sum, price) => sum + price,
+      0,
+    )
+
+    if (total <= 0) {
+      // Testing / free booking mode: skip Stripe
+      const bookingInput: CreateBookingInput = JSON.parse(
+        JSON.stringify(createStripeDto.bookingData),
+      )
+      const newBooking = await this.bookingService.create(bookingInput)
+      return {
+        sessionId: null,
+        message: 'Free booking created (testing mode).',
+        booking: newBooking,
+      }
+    }
+
+    // Normal flow: call Stripe
     return this.stripeService.createStripeSession(createStripeDto)
   }
 
